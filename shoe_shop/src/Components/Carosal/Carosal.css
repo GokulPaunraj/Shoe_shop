@@ -1,0 +1,206 @@
+.carosal{
+  height: 40vh;
+  width: 100vw;
+  display: grid;
+  grid-template-areas: "a b d" "a c d";
+  grid-template-columns: 1fr 6fr 1fr;
+  grid-template-rows: 70% 30%;
+  gap: 1%;
+  background-color: var(--defaultColor);
+  & .slider{
+    display: none;
+  }
+  & .activeSlider{
+    display: flex;
+    grid-area: b;
+    color: whitesmoke;
+    & .imgContainer{
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+      margin-top: 5%;
+      & img{
+        height: 12rem;
+        width: 13rem;
+      }
+    }
+    & .sliderContent{
+      width: 50%;
+      z-index: 2;
+      position: absolute;
+      left: 33%;
+      top: 5%;
+      display: flex;
+      flex-direction: column;
+      align-items: right;
+      justify-content: right;
+      gap: 10%;
+      text-align: right;
+      margin-top: 5%;
+      & .buttons{
+        display: flex;
+        gap: 10%;
+        align-items: right;
+        justify-content: right;
+        margin-top: 5%;
+        & button{
+          width: 5rem;
+          height: 2rem;
+          background: transparent;
+          border: 1px whitesmoke solid;
+          border-radius:1em;
+          text-decoration: none;
+          color: whitesmoke;
+        }
+        & a{
+          text-decoration: none;
+          color: whitesmoke;
+        }
+      }
+      & .name{
+        font-size: 2rem;
+      }
+      & .category{
+        font-size: 0.7rem;
+      }
+      & .description{
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+.arrow{
+  border: 1px whitesmoke solid;
+  border-radius: 50%;
+  height: 13%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & p{
+    font-size: 1.5rem;
+    margin-bottom: 15%;
+    opacity: 0.7;
+  }
+}
+.leftArrow{
+  grid-area: a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+}
+.rightArrow{
+  grid-area: d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+}
+.indicator{
+  grid-area: c;
+  & .position{
+    color: whitesmoke;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  & .dots{
+    display: flex;
+    gap: 3%;
+    & .dot{
+      background-color: whitesmoke;
+      height: 5px;
+      width: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    & .active{
+      background-color: yellow;
+    }
+  }
+}
+
+@media (min-width:768px){
+  .carosal{
+    & .activeSlider{
+      & .imgContainer{
+        width: 80%;
+        margin-left: 5%;
+        & img{
+          height: 18rem;
+          width: 18rem;
+        }
+      }
+      & .sliderContent{
+        & .buttons{
+          & button{
+            width: 7rem;
+            height: 3rem;
+            font-size: 1.3rem;
+            border-radius: 2em;
+          }
+        }
+        & .name{
+          font-size: 3rem;
+        }
+        & .category{
+          font-size: 1.3rem;
+        }
+        & .description{
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  .arrow{
+    height: 10%;
+    width: 40%;
+    & p{
+      font-size: 1.6rem;;
+    }
+  }
+  .indicator{
+    grid-area: c;
+    & .position{
+      font-size: 4rem;
+      font-weight: 700;
+    }
+    & .dots{
+      gap: 2%;
+      & .dot{
+        height: 7px;
+        width: 60px;
+      }
+    }
+  }
+}
+
+@media (min-width:1024px){
+  .carosal{
+    height: auto;
+    & .activeSlider{
+      & .imgContainer{
+        margin-left: 15%;
+        margin-top: 0;
+        & img{
+          height: 22rem;
+          width: 27rem;
+        }
+      }
+      & .sliderContent{
+        top: 5%;
+        left: 25%;
+        & .name{
+          font-size: 4rem;
+        }
+      }
+    }
+  }
+  .arrow{
+    height: 2rem;
+    width: 2rem;
+    & p{
+      font-size: 1.6rem;;
+    }
+  }
+}
