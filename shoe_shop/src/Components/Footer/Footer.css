@@ -1,61 +1,148 @@
-.footer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--defaultColor);
-    width: 100%;
-    opacity: 0;
-    transform: translate3d(0,100px,0);
-}
-.footerContent{
-    width: 100%;
-    height: 50vh;
-    color: white;
-    font-family: 'Oswald',sans-serif;
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-}
-.brand{
-    flex-grow: 0.5;
-    display: flex;
-    flex-direction: column;
-    gap: 10%;
-    align-items: center;
-    justify-content: center;
-    font-size: 300%;
-}
-.about{
-    display: flex;
-    flex-flow: column;
-    justify-content: start;
-    padding: 5%;
-    gap:10%
-}
-ul{
+ul {
     list-style-type: none;
-    margin-left: 10%;
-    font-size:100%;
 }
-ul li{
-    width: 100px;
+li{
+    transition: font-size 0.3s ease, text-shadow 0.3s ease;
 }
-ul li:hover{
-    font-size: 105%;
+li:hover{
+    text-shadow:0 0 5px whitesmoke;
 }
-.socials{
-    display: flex;
-    flex-flow: column;
-    justify-content: start;
-    padding: 5%;
-    gap:10%
+a{
+    text-decoration: none;
+    color: whitesmoke;
 }
-.socials > ul {
-    display: flex;
-    gap: 15%;
-    width: 50px;
+footer{
+    background-color: var(--defaultColor);
+    height: auto;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    align-content: center;
+    color: whitesmoke;
+    & img{
+        margin: 10% 0% 0% 10%;
+        height: 3rem;
+        width: 6rem;
+    }
+    & .socials{
+        text-align: center;
+        font-size: 1.2rem;
+        margin-top: 10%;
+        margin-bottom: 5%;
+        & ul{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10%;
+            &li{
+                height: 2rem;
+                width: 2rem;
+            }
+            & svg{
+                height: 1.5rem;
+                width: 1.5rem;
+                transition: height 0.3s ease, width 0.3s ease;
+            }
+            & svg:hover{
+                height: 1.8rem;
+                width: 1.8rem;
+            }
+        }
+    }
+    & .about, .products{
+        font-size: 1.2rem;
+        text-align: center;
+        & ul{
+            width: 100%;
+            font-size: 1.1rem;
+            text-align: center;
+            & li{
+                width: 100%;
+                margin: 1%;
+                font-size: 1rem;
+            }
+        }
+    }
 }
-.socials > ul >li>svg{
-    width: 100px;
-    height: 100px;
+
+@media (min-width:768px){
+    footer{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas: 'a b c' 'd b c';
+        & img{
+            grid-area: a;
+            height: 4rem;
+            width: 7rem;
+        }
+        & .socials{
+            grid-area: d;
+            font-size: 1.7rem;
+            & ul{
+                gap: 25%;
+                height: 2rem;
+                width: 8rem;
+                &li{
+                    height: 2rem;
+                    width: 2rem;
+                }
+                & svg{
+                    height: 1.7rem;
+                    width: 1.7rem;
+                }
+                & svg:hover{
+                    height: 2rem;
+                    width: 2rem;
+                }
+            }
+        }
+        & .about, .products{
+            font-size: 1.8rem;
+            text-align: center;
+            margin: 10%;
+            & ul{
+                & li{
+                    margin: 3%;
+                    font-size: 1.6rem;
+                }
+                & li:hover{
+                    font-size: 1.7rem;
+                }
+            }
+        }
+        & .about{
+            grid-area: b;
+        }
+        & .products{
+            grid-area: c;
+        }
+    }
+}
+
+@media (min-width:1024px){
+    footer{
+        & .socials{
+            font-size: 1.3rem;
+        }
+        & .about, .products{
+            font-size: 1.2rem;
+            & ul{
+                & li{
+                    font-size: 1.1rem;
+                }
+                & li:hover{
+                    font-size: 1.2rem;
+                }
+            }
+        }
+        & .about{
+            grid-area: b;
+        }
+        & .products{
+            grid-area: c;
+        }
+    }
 }

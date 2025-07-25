@@ -21,7 +21,14 @@ header{
         align-items: center;
         gap: 10%;
         color: whitesmoke;
-        margin: 1rem;
+        margin: 3%;
+        & li{
+            transition: font-size 0.3s ease, text-shadow 0.3s ease;
+        }
+    }
+    & li:hover{
+        text-shadow:0 0 5px whitesmoke;
+        font-size: 1.1rem;
     }
 }
 
@@ -34,7 +41,10 @@ header{
             }
         }
         & ul{
-            font-size: 2rem;
+            font-size: 1.7rem;
+        }
+        & li:hover{
+            font-size: 1.8rem;
         }
     }
 }
@@ -49,7 +59,10 @@ header{
             }
         }
         & ul{
-            font-size: 1.5rem;
+            font-size: 1.1rem;
+        }
+        & li:hover{
+            font-size: 1.2rem;
         }
     }
 }

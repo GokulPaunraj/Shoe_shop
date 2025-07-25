@@ -1,57 +1,70 @@
-import {useLayoutEffect} from 'react'
+import {useEffect, useState} from 'react'
+import { gsap } from "gsap";
 import './Carosal.css';
 import nike1 from '../../assets/images/nike1.png';
 import nike2 from '../../assets/images/nike2.png';
 import nike3 from '../../assets/images/nike3.png';
 
 const Carosal = ()=>{
-    let sliders = document.querySelectorAll('.slider')
-    let carosal = document.querySelector('.carosal')
-    let dots = document.querySelectorAll('.dot');
-    let active = 0;
-    let lastElement = sliders.length-1;
+
+    let [lastElement,setlastElement] = useState(0)
+    let [active,setactive] = useState(0);
     
-    const showSlider = async ()=>{
-      let activeSlide = await carosal.querySelector('.activeSlider')
+    useEffect(()=>{
+      let sliders = document.querySelectorAll('.slider')
+      let dots = document.querySelectorAll('.dot');
+      let activeSlide = document.querySelector('.activeSlider')
+      let activeDot = document.querySelector('.active')
+      let position = document.querySelector('.position')
+
+      setlastElement(sliders.length-1);
+
       if(activeSlide){
         activeSlide.classList.remove('activeSlider')
       }
       sliders[active].classList.add('activeSlider');
-      let activeDot = await carosal.querySelector('.active')
       if(activeDot){
         activeDot.classList.remove('active')
       }
       dots[active].classList.add('active');
-      let position = await document.querySelector('.indicator .position')
       position.innerHTML = '0'+(active+1);
-    }
-    useLayoutEffect(()=>{
-      showSlider();
-    })    
+
+      let tl = gsap.timeline();
+      let image = sliders[active].querySelector(".imgContainer");
+      let content = sliders[active].querySelector(".sliderContent");
+      tl.fromTo(image, { x: -200,  opacity:0 }, { x: 0,  opacity:1 }, 0);
+      tl.fromTo(content, { x: 200,  opacity:0 }, { x: 0,  opacity:1 }, 0);
+
+    },[active])    
 
     const handleNextBtn = ()=>{
-        if(active< lastElement){
-          active +=1;
-        }
-        else{
-          active=0;
-        }
-        //document.documentElement.style.setProperty("--direction",1);
-        showSlider();
+        let activeSlide = document.querySelector('.activeSlider')
+        let ptl = gsap.timeline();
+        let pImage = activeSlide.querySelector(".imgContainer");
+        let pContent = activeSlide.querySelector(".sliderContent");
+        ptl.fromTo(pImage, { x: 0, opacity:1 }, { x: -200, opacity:0 }, 0);
+        ptl.fromTo(pContent, 
+                    { x: 0, opacity:1 }, 
+                    { x: 200, opacity:0, onComplete : ()=>{
+                        if(active< lastElement){
+                          setactive(active+1);
+                        }
+                        else{
+                          setactive(0);
+                        }
+                      }
+                    }, 0);
     }
     const handlePreBtn = ()=>{
         if(active > 0){
-          active -=1;
+          setactive(active-1);
         }
         else{
-          active=lastElement;
+          setactive(lastElement);
         }
-        //document.documentElement.style.setProperty("--direction",-1);
-        showSlider();
     }
     const handleDot = (position)=>{
-          active = position-1;
-          showSlider()
+          setactive(position-1);
     }
     return (
         <section className='carosal'>
@@ -100,7 +113,7 @@ const Carosal = ()=>{
                 </div>
               </div>
             </div>
-            <div className='rightArrow' onClick={()=>handleNextBtn()}><div className='arrow' onClick={()=>handleNextBtn()}><p>&gt;</p></div></div>
+            <div className='rightArrow'><div className='arrow' onClick={()=>handleNextBtn()}><p>&gt;</p></div></div>
 
          </section>
     )
